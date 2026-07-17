@@ -1,5 +1,7 @@
 # Pinboard
 
+Looking for a lightweight, local alternative to Microsoft Edge Collections? Pinboard lets you collect and organize your web pages visually.
+
 Pinboard is a browser extension designed for Chromium-based browsers (Chrome, Brave, Edge) that allows you to collect, organize, and protect your visual web pages and notes in a fast and elegant way.
 
 Unlike traditional tab managers or bookmarks, Pinboard organizes your content into visual **Collections**, saving pages as actual *snapshots* complete with a graphical preview. This allows you to quickly recognize any saved element at a glance.
