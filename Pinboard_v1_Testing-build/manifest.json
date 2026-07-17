@@ -1,0 +1,38 @@
+{
+  "manifest_version": 3,
+  "name": "Pinboard",
+  "version": "1.0",
+  "description": "Organizza e gestisci le tue raccolte di pagine web in locale. Leggero, portabile e compatibile con Brave e browser Chromium.",
+  "permissions": [
+    "storage",
+    "tabs",
+    "contextMenus",
+    "activeTab",
+    "scripting",
+    "offscreen",
+    "unlimitedStorage",
+    "downloads"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "action": {
+    "default_title": "Pinboard",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "icons": {
+    "16": "assets/icon16.png",
+    "32": "assets/icon32.png",
+    "48": "assets/icon48.png",
+    "128": "assets/icon128.png"
+  },
+  "options_page": "options.html",
+  "author": "Psychogeek",
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": false
+  }
+}

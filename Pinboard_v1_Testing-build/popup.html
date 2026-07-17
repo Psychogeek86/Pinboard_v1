@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Pinboard</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="app" id="app">
+  <div id="mainView">
+
+  <!-- TOPBAR -->
+  <header class="topbar">
+    <div class="topbar-left">
+      <span id="backBtn" class="icon-btn" title="Torna alle raccolte" data-i18n-title="backToCollections" data-i18n-title="backToCollections" hidden>&#8617;</span>
+      <h1>Pinboard</h1>
+    </div>
+    <div class="topbar-actions">
+    <button class="icon-btn" id="coffeeBtn" title="Offrimi un caffè" data-i18n-title="Support the project">☕</button>    
+	<button class="icon-btn" id="themeToggle" title="Cambia tema" data-i18n-title="changeTheme" data-i18n-title="changeTheme">◐</button>
+	      <!-- Dropdown menu generale -->
+      <div class="dropdown" id="globalMenuContainer">
+        <button class="icon-btn" id="globalMenuBtn" class="icon-btn general-menu-dots" title="Menu opzioni" data-i18n-title="optionsMenu" data-i18n-title="optionsMenu"><svg class="general-menu-dots-svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="5" r="2.35"/><circle cx="12" cy="12" r="2.35"/><circle cx="12" cy="19" r="2.35"/></svg></button>
+        <div class="dropdown-panel floating-menu" id="globalMenuPanel" hidden>
+          <div class="dd-group">
+            <div class="dd-section-label" data-i18n="sortCollections">Ordina raccolte</div>
+            <button data-global="sort-name" data-i18n="byName">Per nome</button>
+            <button data-global="sort-date" data-i18n="byDate">Per data</button>
+            <button data-global="sort-usage" data-i18n="byUsage">Per utilizzo</button>
+          </div>
+          <div class="dd-group">
+            <button data-global="select-all-collections" data-i18n="selectAll">Seleziona tutto</button>
+            <button data-global="clear-selected-collections" data-i18n="clearSelection">Deseleziona tutto</button>
+            <button data-global="delete-selected" class="danger" data-i18n="deleteSelected">Elimina selezionate</button>
+          </div>
+          <div class="dd-group">
+            <div class="dd-section-label" data-i18n="security">Sicurezza</div>
+            <button data-global="set-master-password"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14" style="vertical-align:middle;margin-right:5px"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg><span data-i18n="setPassword">Imposta Password</span></button>
+          </div>
+          <div class="dd-group">
+            <div class="dd-section-label" data-i18n="backup">Backup</div>
+            <button data-global="backup-export" data-i18n="exportBackup">Esporta backup</button>
+            <label class="menu-file-trigger" data-i18n-label="importBackup"><span>Importa backup</span><input type="file" id="backupImport" accept="application/json" hidden></label>
+          </div>
+          <div class="dd-group" id="languageMenuGroup">
+            <div class="dd-section-label" data-i18n="language">Lingua</div>
+            <button data-lang="it" aria-label="Italiano">Italiano</button>
+            <button data-lang="en" aria-label="English">English</button>
+            <button data-lang="fr" aria-label="Français">Français</button>
+            <button data-lang="es" aria-label="Español">Español</button>
+            <button data-lang="de" aria-label="Deutsch">Deutsch</button>
+            <button data-lang="pt" aria-label="Português">Português</button>
+            <button data-lang="ru" aria-label="Русский">Русский</button>
+            <button data-lang="ar" aria-label="العربية">العربية</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- NEW COLLECTION BAR -->
+  <div class="new-collection-bar" id="newCollectionBar">
+    <input id="newCollectionTitle" type="text" placeholder="Nome nuova raccolta…" data-i18n-placeholder="newCollectionName">
+    <button class="btn primary" id="createCollection" data-i18n="create">Crea</button>
+    <button class="btn" id="createFromTabs" title="Crea raccolta da tutte le tab aperte" data-i18n-title="createFromTabsTitle" data-i18n="fromOpenTabs">Da tab aperte</button>
+  </div>
+
+  <!-- COLLECTIONS LIST VIEW -->
+  <div id="collectionsView" class="collections-view"></div>
+
+  </div>
+
+  <!-- SINGLE COLLECTION VIEW OVERLAY (hidden initially) -->
+  <div id="collectionView" class="collection-view-overlay" hidden>
+    <div class="collection-header">
+      <button class="icon-btn collection-inline-back back-modern-btn" id="collectionBackInlineBtn" title="Torna indietro" data-i18n-title="goBack"><svg class="back-modern-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M11 7L6 12L11 17"/><path d="M7 12H16.5C18.985 12 21 9.985 21 7.5S18.985 3 16.5 3H13"/></svg></button>
+      <input class="collection-title-editable" id="collectionTitleInput" type="text" placeholder="Nome raccolta" data-i18n-placeholder="collectionName" readonly title="Doppio clic per rinominare" data-i18n-title="doubleClickRename">
+    </div>
+    <div class="collection-subbar" id="collectionToolsRow">
+      <button class="icon-btn note-add-icon-btn" id="addNoteBtn" title="Aggiungi nota" aria-label="Aggiungi nota" data-i18n-title="addNote" data-i18n-aria-label="addNote" data-i18n-title="addNote" data-i18n-aria-label="addNote">
+        <span class="note-add-btn__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="square" stroke-linejoin="miter">
+            <path d="M5.75 4.75H18.25V19.25H9.2L5.75 15.8V4.75Z"></path>
+            <path d="M5.75 15.8H9.2V19.25"></path>
+            <path d="M5.75 15.8L9.2 16.9"></path>
+          </svg>
+        </span>
+      </button>
+      <input type="search" id="itemSearch" placeholder="Cerca…" data-i18n-placeholder="search">
+      <span id="collectionCountBadge" class="count-badge"></span>
+      <!-- Dropdown menu raccolta -->
+      <button class="icon-btn" id="collectionRefreshBtn" title="Aggiorna anteprime mancanti" data-i18n-title="refreshMissingPreviews" data-i18n-title="refreshMissingPreviews">&#8635;</button>
+      <div class="dropdown" id="collectionMenuContainer">
+        <button class="icon-btn" id="collectionMenuBtn" class="icon-btn general-menu-dots" title="Opzioni raccolta" data-i18n-title="collectionOptions" data-i18n-title="collectionOptions"><svg class="general-menu-dots-svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="5" r="2.35"/><circle cx="12" cy="12" r="2.35"/><circle cx="12" cy="19" r="2.35"/></svg></button>
+        <div class="dropdown-panel floating-menu" id="collectionMenuPanel" hidden>
+          <div class="dd-group">
+            <div class="dd-section-label" data-i18n="sortPages">Ordina pagine</div>
+            <button data-col="sort-name" data-i18n="byName">Per nome</button>
+            <button data-col="sort-date" data-i18n="byDate">Per data</button>
+            <button data-col="sort-usage" data-i18n="byUsage">Per utilizzo</button>
+          </div>
+          <div class="dd-group">
+            <div class="dd-section-label" data-i18n="exportCollection">Esporta raccolta</div>
+            <button data-col="export-txt" data-i18n="exportTxt">Esporta TXT</button>
+            <button data-col="export-json" data-i18n="exportJson">Esporta JSON</button>
+            <button data-col="export-html" data-i18n="exportHtml">Esporta HTML</button>
+          </div>
+          <div class="dd-group">
+            <div class="dd-section-label" data-i18n="openPages">Apri pagine</div>
+            <button data-col="open-all-tabs" data-i18n="openAllTabs">Apri tutte in tab</button>
+            <button data-col="open-selected-tabs" data-i18n="openSelectedTabs">Apri selezionate in tab</button>
+            <button data-col="open-all-window" data-i18n="openAllWindow">Apri tutte in nuova finestra</button>
+          </div>
+          <div class="dd-group">
+            <div class="dd-section-label" data-i18n="moveSelectedPages">Sposta pagine selezionate</div>
+            <button data-col="move-to-existing">In raccolta esistente…</button>
+            <button data-col="move-to-new" data-i18n="toNewCollection">In nuova raccolta</button>
+          </div>
+          <div class="dd-group">
+            <button data-col="select-all-items" data-i18n="selectAll">Seleziona tutto</button>
+            <button data-col="clear-selected-items" data-i18n="clearSelection">Deseleziona tutto</button>
+            <button data-col="delete-selected-items" class="danger" data-i18n="deleteSelected">Elimina selezionate</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="itemsGrid" class="items-grid"></div>
+  </div>
+</div>
+
+<div id="noteOverlay" class="note-overlay" hidden>
+  <div class="note-overlay-backdrop"></div>
+  <div class="note-overlay-panel">
+    <div class="note-overlay-card" id="noteOverlayCard">
+      <div class="note-toolbar note-overlay-toolbar">
+        <button class="note-tool" id="noteCmdBold" title="Grassetto" data-i18n-title="bold" data-i18n-title="bold"><strong>B</strong></button>
+        <button class="note-tool" id="noteCmdItalic" title="Corsivo" data-i18n-title="italic" data-i18n-title="italic"><em>I</em></button>
+        <button class="note-tool" id="noteCmdUnderline" title="Sottolineato" data-i18n-title="underline" data-i18n-title="underline"><span class="note-u">U</span></button>
+        <button class="note-tool" id="noteCmdBullets" title="Elenco puntato" data-i18n-title="bullets" data-i18n-title="bullets"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="6.2" cy="7" r="1.4"></circle><circle cx="6.2" cy="12" r="1.4"></circle><circle cx="6.2" cy="17" r="1.4"></circle><path d="M10 7h8"></path><path d="M10 12h8"></path><path d="M10 17h8"></path></svg></button>
+        <button class="note-tool note-font-btn" id="noteFontBtn" title="Grandezza carattere" data-i18n-title="fontSize" data-i18n-title="fontSize">Aa</button>
+        <div class="note-palette-wrap">
+          <button class="note-tool note-palette-btn" id="notePaletteBtn" title="Colore nota" data-i18n-title="noteColor" aria-expanded="false">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.4c-3.5 4.1-5.8 7.2-5.8 10.1A5.8 5.8 0 0 0 12 19.3a5.8 5.8 0 0 0 5.8-5.8c0-2.9-2.3-6-5.8-10.1z"></path><path d="M7 13.6h10A5 5 0 0 1 12 19a5 5 0 0 1-5-5.4z" class="drop-fill"></path></svg>
+          </button>
+          <div class="note-palette-menu" id="notePaletteMenu" hidden>
+            <button class="note-swatch" data-note-swatch="#fff1a8" style="background:#fff1a8" title="Giallo"></button>
+            <button class="note-swatch" data-note-swatch="#ffd8e6" style="background:#ffd8e6" title="Rosa"></button>
+            <button class="note-swatch" data-note-swatch="#dff5c8" style="background:#dff5c8" title="Verde"></button>
+            <button class="note-swatch" data-note-swatch="#d9f0ff" style="background:#d9f0ff" title="Azzurro"></button>
+            <button class="note-swatch" data-note-swatch="#ebe2ff" style="background:#ebe2ff" title="Lilla"></button>
+          </div>        </div>
+        <button class="note-tool note-save-btn" id="noteSaveBtn" title="Salva nota" data-i18n-title="saveNote" data-i18n-title="saveNote">✓</button>
+      </div>
+      <div class="note-title-wrap">
+        <input id="noteTitleInput" class="note-title-input" type="text" placeholder="Titolo" data-i18n-placeholder="title" data-i18n-placeholder="title" maxlength="120">
+      </div>
+      <div class="note-editor-shell" id="noteEditorShell">
+        <div class="note-editor note-overlay-editor" id="noteOverlayEditor" contenteditable="true" spellcheck="true"></div>
+      </div>
+      <div class="note-resize-handle" id="noteResizeHandle" aria-hidden="true"></div>
+    </div>
+  </div>
+</div>
+
+<!-- CONTEXT MENUS -->
+<div id="collectionCtxMenu" class="ctx-menu floating-menu" hidden>
+  <button class="ctx-menu-item ctx-lock-only" data-ctx-action="collection-lock"><span class="ctx-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span><span class="ctx-label" data-i18n="lockCollection">Blocca raccolta</span></button>
+  <button class="ctx-menu-item ctx-unlock-only" data-ctx-action="collection-unlock"><span class="ctx-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 9.9-1"/><path d="M4 4l16 16"/></svg></span><span class="ctx-label" data-i18n="unlockCollection">Rimuovi blocco</span></button>
+  <div class="ctx-separator ctx-nolock-only"></div>
+  <button class="ctx-menu-item ctx-nolock-only" data-ctx-action="collection-edit-title"><span class="ctx-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 20h4l10-10-4-4L4 16v4z"></path><path d="M13 7l4 4"></path></svg></span><span class="ctx-label" data-i18n="editCollection">Modifica raccolta</span></button>
+  <button class="ctx-menu-item ctx-nolock-only" data-ctx-action="collection-paste-url"><span class="ctx-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5h8"></path><path d="M9 3h6v4H9z"></path><rect x="6" y="5" width="12" height="16" rx="2"></rect></svg></span><span class="ctx-label" data-i18n="paste">Incolla</span></button>
+  <button class="ctx-menu-item danger ctx-nolock-only" data-ctx-action="collection-delete"><span class="ctx-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 6h18"></path><path d="M8 6V4h8v2"></path><path d="M19 6l-1 14H6L5 6"></path></svg></span><span class="ctx-label" data-i18n="deleteCollection">Elimina raccolta</span></button>
+  <div class="ctx-separator ctx-nolock-only"></div>
+  <button class="ctx-menu-item ctx-nolock-only" data-ctx-action="collection-open-all-tabs"><span class="ctx-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M14 5h5v5"></path><path d="M10 14L19 5"></path><rect x="4" y="7" width="12" height="12" rx="2"></rect></svg></span><span class="ctx-label" data-i18n="openNewTab">Apri in una nuova scheda</span></button>
+  <button class="ctx-menu-item ctx-nolock-only" data-ctx-action="collection-open-all-window"><span class="ctx-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="M12 5v14"></path></svg></span><span class="ctx-label" data-i18n="openNewWindow">Apri in una nuova finestra</span></button>
+</div>
+<div id="itemCtxMenu" class="ctx-menu floating-menu" hidden>
+  <button class="ctx-menu-item" data-ctx-action="item-edit-title"><span class="ctx-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 20h4l10-10-4-4L4 16v4z"></path><path d="M13 7l4 4"></path></svg></span><span class="ctx-label" data-i18n="edit">Modifica</span></button>
+  <button class="ctx-menu-item" data-ctx-action="item-copy-url"><span class="ctx-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="10" height="10" rx="2"></rect><rect x="5" y="5" width="10" height="10" rx="2"></rect></svg></span><span class="ctx-label" data-i18n="copy">Copia</span></button>
+  <button class="ctx-menu-item danger" data-ctx-action="item-delete"><span class="ctx-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 6h18"></path><path d="M8 6V4h8v2"></path><path d="M19 6l-1 14H6L5 6"></path></svg></span><span class="ctx-label" data-i18n="delete">Elimina</span></button>
+  <div class="ctx-separator"></div>
+  <button class="ctx-menu-item" data-ctx-action="item-open-tab"><span class="ctx-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M14 5h5v5"></path><path d="M10 14L19 5"></path><rect x="4" y="7" width="12" height="12" rx="2"></rect></svg></span><span class="ctx-label" data-i18n="openNewTab">Apri in una nuova scheda</span></button>
+  <button class="ctx-menu-item" data-ctx-action="item-open-window"><span class="ctx-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="M12 5v14"></path></svg></span><span class="ctx-label" data-i18n="openNewWindow">Apri in una nuova finestra</span></button>
+</div>
+<div id="noteCtxMenu" class="ctx-menu floating-menu" hidden>
+  <button class="ctx-menu-item" data-ctx-action="note-edit-title"><span class="ctx-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 20h4l10-10-4-4L4 16v4z"></path><path d="M13 7l4 4"></path></svg></span><span class="ctx-label" data-i18n="editTitle">Modifica titolo</span></button>
+  <button class="ctx-menu-item" data-ctx-action="note-copy-content"><span class="ctx-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="10" height="10" rx="2"></rect><rect x="5" y="5" width="10" height="10" rx="2"></rect></svg></span><span class="ctx-label" data-i18n="copyContent">Copia contenuto</span></button>
+  <button class="ctx-menu-item" data-ctx-action="note-export"><span class="ctx-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3v12"></path><path d="M8 11l4 4 4-4"></path><path d="M5 19h14"></path></svg></span><span class="ctx-label" data-i18n="export">Esporta</span></button>
+  <div class="ctx-separator"></div>
+  <button class="ctx-menu-item danger" data-ctx-action="note-delete"><span class="ctx-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 6h18"></path><path d="M8 6V4h8v2"></path><path d="M19 6l-1 14H6L5 6"></path></svg></span><span class="ctx-label" data-i18n="delete">Elimina</span></button>
+</div>
+<div id="collectionCanvasCtxMenu" class="ctx-menu floating-menu" hidden>
+  <button class="ctx-menu-item" data-canvas-action="add-note"><span class="ctx-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="5" y="4" width="12" height="16" rx="2"></rect><path d="M9 10h4"></path><path d="M11 8v4"></path></svg></span><span class="ctx-label" data-i18n="addNote">Aggiungi nota</span></button>
+  <button class="ctx-menu-item" data-canvas-action="add-current-page"><span class="ctx-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 5v14"></path><path d="M5 12h14"></path></svg></span><span class="ctx-label" data-i18n="saveCurrentPage">Aggiungi pagina corrente</span></button>
+  <button class="ctx-menu-item" data-canvas-action="select-all-items"><span class="ctx-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="5" y="5" width="14" height="14" rx="2"></rect><path d="M8 12l2.5 2.5L16 9"></path></svg></span><span class="ctx-label" data-i18n="selectAll">Seleziona tutto</span></button>
+  <button class="ctx-menu-item danger" data-canvas-action="delete-selected-items"><span class="ctx-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 6h18"></path><path d="M8 6V4h8v2"></path><path d="M19 6l-1 14H6L5 6"></path></svg></span><span class="ctx-label" data-i18n="deleteSelected">Elimina selezionate</span></button>
+</div>
+
+<script src="i18n.js"></script>
+  <script src="popup.js"></script>
+
+<!-- MODAL DIALOGO INTERNO -->
+<div id="pinModal" style="display:none;position:fixed;inset:0;z-index:2147483647;background:rgba(0,0,0,0.45);align-items:center;justify-content:center;">
+    <div id="pinModalBox" style="background:var(--color-surface,#fff);border-radius:10px;padding:20px 22px 16px;max-width:calc(100% - 32px);width:340px;box-shadow:0 8px 32px rgba(0,0,0,0.22);display:flex;flex-direction:column;gap:10px;font-family:inherit;">
+      <div id="pinModalMsg" style="font-size:13px;color:var(--color-text,#111);line-height:1.5;white-space:pre-wrap;word-break:break-word;"></div>
+      <input id="pinModalInput" type="password" autocomplete="off" style="display:none;padding:7px 10px;border:1px solid var(--color-border,#ccc);border-radius:6px;font-size:13px;background:var(--color-bg,#fafafa);color:var(--color-text,#111);outline:none;">
+      <input id="pinModalInputText" type="text" autocomplete="off" style="display:none;padding:7px 10px;border:1px solid var(--color-border,#ccc);border-radius:6px;font-size:13px;background:var(--color-bg,#fafafa);color:var(--color-text,#111);outline:none;">
+      <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:4px;">
+        <button id="pinModalCancel" class="pin-modal-btn pin-modal-btn--secondary" style="display:none;" data-i18n="cancel">Annulla</button>
+        <button id="pinModalOk" class="pin-modal-btn pin-modal-btn--primary" data-i18n="ok">OK</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="moveElementsOverlay" style="display:none; position:fixed; inset:0; z-index:2147483640; background:rgba(0,0,0,0.45); align-items:center; justify-content:center;">
+    <div style="background:var(--color-surface,#fff); border-radius:10px; padding:20px; max-width:calc(100% - 32px); width:340px; box-shadow:0 8px 32px rgba(0,0,0,0.22); display:flex; flex-direction:column; gap:12px;">
+      <h3 style="margin:0; font-size:16px; color:var(--color-text,#111);" data-i18n="moveSelectedPages">Sposta pagine selezionate</h3>
+      
+      <div id="moveTargetCollectionsList" style="max-height:200px; overflow-y:auto; border:1px solid var(--color-border,#ccc); border-radius:6px; display:flex; flex-direction:column; background:var(--color-bg,#fafafa);">
+        </div>
+
+      <div style="display:flex; gap:8px; justify-content:flex-end; margin-top:4px;">
+        <button id="cancelMoveElements" class="pin-modal-btn pin-modal-btn--secondary" style="padding:7px 12px; border:1px solid var(--color-border,#ccc); border-radius:6px; background:none; cursor:pointer; font-size:13px; color:var(--color-text,#111);">Annulla</button>
+      </div>
+    </div>
+  </div>
+
+</div> </body>
+</html>

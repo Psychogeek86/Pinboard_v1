@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+
+<html lang="it">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<title data-i18n="guideTitle">Pinboard - Guida rapida</title>
+<link href="styles.css" rel="stylesheet"/>
+</head>
+<body data-i18n-root="options">
+<div class="app app-wide">
+<header class="topbar">
+<div>
+<div class="eyebrow" data-i18n="quickGuide">Guida rapida</div>
+<h1>Pinboard</h1>
+</div>
+</header>
+<section class="card prose">
+<h2 data-i18n="installation">Installazione</h2>
+<ol>
+<li data-i18n="installStep1"></li>
+<li data-i18n="installStep2"></li>
+<li data-i18n="installStep3"></li>
+</ol>
+<h2 data-i18n="includedFeatures">Funzioni incluse</h2>
+<ul>
+<li><span data-i18n="createRenameCollections">Creazione e rinomina raccolte.</span></li>
+<li><span data-i18n="saveCurrentPage">Salvataggio pagina corrente.</span></li>
+<li><span data-i18n="saveTextAndImages">Salvataggio testo selezionato e immagini tramite menu contestuale.</span></li>
+<li><span data-i18n="quickNotes">Note rapide.</span></li>
+<li><span data-i18n="moveItems">Sposta gli elementi tra raccolte.</span></li>
+<li><span data-i18n="exportCsvHtml">Esportazione in CSV e HTML.</span></li>
+</ul>
+<p><span data-i18n="cloudLimitation">Questa estensione funziona in locale e non dipende da servizi esterni.</span></p>
+</section>
+</div>
+<script id="pinboard-options-i18n">
+(() => {
+  const SUPPORTED = ['it','en','fr','es','de','pt','ar'];
+  const DICT = {
+    it: {
+      guideTitle: 'Pinboard - Guida rapida',
+      quickGuide: 'Guida rapida',
+      installation: 'Installazione',
+      installStep1: 'Apri brave://extensions o la pagina delle estensioni del tuo browser Chromium.',
+      installStep2: 'Attiva Developer mode.',
+      installStep3: 'Usa Load unpacked e seleziona la cartella dell'estensione.',
+      includedFeatures: 'Funzioni incluse',
+      createRenameCollections: 'Creazione e rinomina raccolte.',
+      saveCurrentPage: 'Salvataggio pagina corrente.',
+      saveTextAndImages: 'Salvataggio testo selezionato e immagini tramite menu contestuale.',
+      quickNotes: 'Note rapide.',
+      moveItems: 'Sposta gli elementi tra raccolte.',
+      exportCsvHtml: 'Esportazione in CSV e HTML.',
+      cloudLimitation: 'Questa estensione funziona in locale e non dipende da servizi esterni.'
+    },
+    en: {
+      guideTitle: 'Pinboard - Guide',
+      quickGuide: 'Quick guide',
+      installation: 'Installation',
+      installStep1: 'Open brave://extensions or the extensions page of your Chromium browser.',
+      installStep2: 'Enable Developer mode.',
+      installStep3: 'Use Load unpacked and select the extension folder.',
+      includedFeatures: 'Included features',
+      createRenameCollections: 'Create and rename collections.',
+      saveCurrentPage: 'Save the current page.',
+      saveTextAndImages: 'Save selected text and images from the context menu.',
+      quickNotes: 'Quick notes.',
+      moveItems: 'Move items between collections.',
+      exportCsvHtml: 'Export to CSV and HTML.',
+      cloudLimitation: 'Questa estensione funziona in locale e non dipende da servizi esterni.'
+    },
+    fr: {
+      guideTitle: 'Pinboard - Guide',
+      quickGuide: 'Guide rapide',
+      installation: 'Installation',
+      installStep1: 'Ouvrez brave://extensions ou la page des extensions de votre navigateur Chromium.',
+      installStep2: 'Activez le mode développeur.',
+      installStep3: 'Utilisez Load unpacked et sélectionnez le dossier de l'extension.',
+      includedFeatures: 'Fonctions incluses',
+      createRenameCollections: 'Créer et renommer des collections.',
+      saveCurrentPage: 'Enregistrer la page actuelle.',
+      saveTextAndImages: 'Enregistrer le texte sélectionné et les images depuis le menu contextuel.',
+      quickNotes: 'Notes rapides.',
+      moveItems: 'Déplacer les éléments entre les collections.',
+      exportCsvHtml: 'Exporter en CSV et HTML.',
+      cloudLimitation: 'La synchronisation cloud et l'intégration native avec Word, Excel et OneNote ne peuvent pas être reproduites exactement sans infrastructure externe ou services tiers propriétaires.'
+    },
+    es: {
+      guideTitle: 'Pinboard - Guía',
+      quickGuide: 'Guía rápida',
+      installation: 'Instalación',
+      installStep1: 'Abre brave://extensions o la página de extensiones de tu navegador Chromium.',
+      installStep2: 'Activa Developer mode.',
+      installStep3: 'Usa Load unpacked y selecciona la carpeta de la extensión.',
+      includedFeatures: 'Funciones incluidas',
+      createRenameCollections: 'Crear y renombrar colecciones.',
+      saveCurrentPage: 'Guardar la página actual.',
+      saveTextAndImages: 'Guardar texto seleccionado e imágenes desde el menú contextual.',
+      quickNotes: 'Notas rápidas.',
+      moveItems: 'Mover elementos entre colecciones.',
+      exportCsvHtml: 'Exportar en CSV y HTML.',
+      cloudLimitation: 'La sincronización en la nube y la integración nativa con Word, Excel y OneNote no pueden reproducirse exactamente sin infraestructura externa o servicios propietarios de terceros.'
+    },
+    de: {
+      guideTitle: 'Pinboard - Anleitung',
+      quickGuide: 'Kurzanleitung',
+      installation: 'Installation',
+      installStep1: 'Öffnen Sie brave://extensions oder die Erweiterungsseite Ihres Chromium-Browsers.',
+      installStep2: 'Aktivieren Sie den Entwicklermodus.',
+      installStep3: 'Verwenden Sie Load unpacked und wählen Sie den Ordner der Erweiterung aus.',
+      includedFeatures: 'Enthaltene Funktionen',
+      createRenameCollections: 'Sammlungen erstellen und umbenennen.',
+      saveCurrentPage: 'Aktuelle Seite speichern.',
+      saveTextAndImages: 'Markierten Text und Bilder über das Kontextmenü speichern.',
+      quickNotes: 'Schnelle Notizen.',
+      moveItems: 'Elemente zwischen Sammlungen verschieben.',
+      exportCsvHtml: 'Als CSV und HTML exportieren.',
+      cloudLimitation: 'Cloud-Synchronisierung und native Integration mit Word, Excel und OneNote lassen sich ohne externe Infrastruktur oder proprietäre Drittanbieterdienste nicht exakt nachbilden.'
+    },
+    pt: {
+      guideTitle: 'Pinboard - Guia',
+      quickGuide: 'Guia rápido',
+      installation: 'Instalação',
+      installStep1: 'Abra brave://extensions ou a página de extensões do seu navegador Chromium.',
+      installStep2: 'Ative o modo de programador.',
+      installStep3: 'Use Load unpacked e selecione a pasta da extensão.',
+      includedFeatures: 'Funcionalidades incluídas',
+      createRenameCollections: 'Criar e renomear coleções.',
+      saveCurrentPage: 'Guardar a página atual.',
+      saveTextAndImages: 'Guardar texto selecionado e imagens através do menu contextual.',
+      quickNotes: 'Notas rápidas.',
+      moveItems: 'Mover itens entre coleções.',
+      exportCsvHtml: 'Exportar em CSV e HTML.',
+      cloudLimitation: 'A sincronização na cloud e a integração nativa com Word, Excel e OneNote não podem ser reproduzidas exatamente sem infraestrutura externa ou serviços proprietários de terceiros.'
+    },
+    ar: {
+      guideTitle: 'Pinboard - الدليل',
+      quickGuide: 'دليل سريع',
+      installation: 'التثبيت',
+      installStep1: 'افتح brave://extensions أو صفحة الإضافات في متصفح Chromium لديك.',
+      installStep2: 'فعّل وضع المطور.',
+      installStep3: 'استخدم Load unpacked واختر مجلد الإضافة.',
+      includedFeatures: 'الميزات المضمنة',
+      createRenameCollections: 'إنشاء المجموعات وإعادة تسميتها.',
+      saveCurrentPage: 'حفظ الصفحة الحالية.',
+      saveTextAndImages: 'حفظ النص المحدد والصور عبر القائمة السياقية.',
+      quickNotes: 'ملاحظات سريعة.',
+      moveItems: 'نقل العناصر بين المجموعات.',
+      exportCsvHtml: 'التصدير إلى CSV وHTML.',
+      cloudLimitation: 'لا يمكن إعادة إنتاج المزامنة السحابية والتكامل الأصلي مع Word وExcel وOneNote بشكل مطابق دون بنية خارجية أو خدمات طرف ثالث مملوكة.'
+    }
+  };
+  const lang = () => {
+    const raw = String(localStorage.getItem('pinboardLanguage') || document.documentElement.lang || navigator.language || 'it').toLowerCase().split('-')[0];
+    return SUPPORTED.includes(raw) ? raw : 'it';
+  };
+  const t = key => (DICT[lang()] && DICT[lang()][key]) || DICT.it[key] || key;
+  const setText = (el, text) => {
+    if (!el) return;
+    if (el.tagName === 'INPUT') el.value = text;
+    else el.textContent = text;
+  };
+  const apply = () => {
+    const current = lang();
+    document.documentElement.lang = current;
+    document.documentElement.dir = current === 'ar' ? 'rtl' : 'ltr';
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      if (key) setText(el, t(key));
+    });
+    document.querySelectorAll('[data-i18n-title]').forEach(el => {
+      const key = el.getAttribute('data-i18n-title');
+      if (key) el.setAttribute('title', t(key));
+    });
+    document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+      const key = el.getAttribute('data-i18n-placeholder');
+      if (key) el.setAttribute('placeholder', t(key));
+    });
+    document.title = t('guideTitle');
+  };
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', apply, { once:true });
+  else apply();
+})();
+</script>
+
+
+
+<script id="PINBOARD_OPTIONS_I18N_FINAL_V78">
+(function(){
+  const SUPPORTED = ['it','en','fr','es','de','pt','ru','ar'];
+  const DICT = {
+    it: {
+      guideTitle:'Pinboard - Guida rapida', quickGuide:'Guida rapida', installation:'Installazione', includedFeatures:'Funzioni incluse', developer:'Sviluppatore',
+      backToCollections:'Torna alle raccolte', changeTheme:'Cambia tema', optionsMenu:'Menu opzioni', sortCollections:'Ordina raccolte', byName:'Per nome', byDate:'Per data', byUsage:'Per utilizzo',
+      selectAll:'Seleziona tutto', clearSelection:'Deseleziona tutto', deleteSelected:'Elimina selezionate', security:'Sicurezza', setPassword:'Imposta master password', backup:'Backup',
+      exportBackup:'Esporta backup', importBackup:'Importa backup', language:'Lingua', newCollectionName:'Nome nuova raccolta', create:'Crea', fromOpenTabs:'Da tab aperte',
+      createFromTabsTitle:'Crea raccolta da tutte le tab aperte', goBack:'Torna indietro', collectionName:'Nome raccolta', doubleClickRename:'Doppio clic per rinominare', addNote:'Aggiungi nota',
+      search:'Cerca', refreshMissingPreviews:'Aggiorna anteprime mancanti', collectionOptions:'Opzioni raccolta', sortPages:'Ordina pagine', exportCollection:'Esporta raccolta',
+      exportTxt:'Esporta TXT', exportJson:'Esporta JSON', exportHtml:'Esporta HTML', openPages:'Apri pagine', openAllTabs:'Apri tutte in tab', openSelectedTabs:'Apri selezionate in tab',
+      openAllWindow:'Apri tutte in nuova finestra', moveSelectedPages:'Sposta pagine selezionate', toExistingCollection:'In raccolta esistente', toNewCollection:'In nuova raccolta',
+      saveCurrentPage:'Salva pagina corrente', quickCollection:'Raccolta rapida', page:'Pagina', localFirst:'Pinboard funziona completamente in locale e punta a offrire una gestione semplice delle raccolte senza dipendere da servizi esterni.',
+      cloudLimitation:'Questa estensione funziona in locale e non dipende da servizi esterni.',
+      openExtensionsPage:'Apri Brave o la pagina estensioni del tuo browser Chromium.', enableDeveloperMode:'Attiva Developer mode.', loadUnpacked:'Usa Load unpacked e seleziona la cartella dellestensione.',
+      createRenameCollections:'Creazione e rinomina raccolte.', saveTextAndImages:'Salvataggio testo selezionato e immagini tramite menu contestuale.', quickNotes:'Note rapide.', moveItems:'Sposta gli elementi tra raccolte.', exportCsvHtml:'Esportazione in CSV e HTML.'
+    },
+    en: {
+      guideTitle:'Pinboard - Guide', quickGuide:'Quick guide', installation:'Installation', includedFeatures:'Included features', developer:'Developer',
+      backToCollections:'Back to collections', changeTheme:'Change theme', optionsMenu:'Options menu', sortCollections:'Sort collections', byName:'By name', byDate:'By date', byUsage:'By usage',
+      selectAll:'Select all', clearSelection:'Clear selection', deleteSelected:'Delete selected', security:'Security', setPassword:'Set master password', backup:'Backup',
+      exportBackup:'Export backup', importBackup:'Import backup', language:'Language', newCollectionName:'New collection name', create:'Create', fromOpenTabs:'From open tabs',
+      createFromTabsTitle:'Create collection from all open tabs', goBack:'Go back', collectionName:'Collection name', doubleClickRename:'Double click to rename', addNote:'Add note',
+      search:'Search', refreshMissingPreviews:'Refresh missing previews', collectionOptions:'Collection options', sortPages:'Sort pages', exportCollection:'Export collection',
+      exportTxt:'Export TXT', exportJson:'Export JSON', exportHtml:'Export HTML', openPages:'Open pages', openAllTabs:'Open all in tabs', openSelectedTabs:'Open selected in tabs',
+      openAllWindow:'Open all in new window', moveSelectedPages:'Move selected pages', toExistingCollection:'To existing collection', toNewCollection:'To new collection',
+      saveCurrentPage:'Save current page', quickCollection:'Quick collection', page:'Page', localFirst:'Pinboard works fully locally and aims to offer simple collection management without depending on external services.',
+      cloudLimitation:'Questa estensione funziona in locale e non dipende da servizi esterni.',
+      openExtensionsPage:'Open Brave or your Chromium browser extensions page.', enableDeveloperMode:'Enable Developer mode.', loadUnpacked:'Use Load unpacked and select the extension folder.',
+      createRenameCollections:'Create and rename collections.', saveTextAndImages:'Save selected text and images via the context menu.', quickNotes:'Quick notes.', moveItems:'Move items between collections.', exportCsvHtml:'Export to CSV and HTML.'
+    }
+  };
+  const getLang = () => {
+    try {
+      const raw = (localStorage.getItem('pinboardLanguage') || (navigator.language || 'it')).toLowerCase().split('-')[0];
+      return SUPPORTED.includes(raw) ? raw : 'it';
+    } catch {
+      return 'it';
+    }
+  };
+  const t = (key) => (DICT[getLang()] && DICT[getLang()][key]) || (DICT.en && DICT.en[key]) || key;
+  const setText = (el, value) => {
+    const textNodes = Array.from(el.childNodes).filter(n => n.nodeType === Node.TEXT_NODE);
+    if (!textNodes.length) { if (!el.children.length) el.textContent = value; return; }
+    const first = textNodes[0];
+    first.nodeValue = value;
+    textNodes.slice(1).forEach(n => { n.nodeValue = ''; });
+  };
+  const apply = () => {
+    const lang = getLang();
+    document.documentElement.lang = lang;
+    document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+    document.querySelectorAll('[data-i18n]').forEach(el => { const key = el.getAttribute('data-i18n'); if (key) setText(el, t(key)); });
+    document.querySelectorAll('[data-i18n-title]').forEach(el => { const key = el.getAttribute('data-i18n-title'); if (key) el.setAttribute('title', t(key)); });
+    document.querySelectorAll('[data-i18n-placeholder]').forEach(el => { const key = el.getAttribute('data-i18n-placeholder'); if (key) el.setAttribute('placeholder', t(key)); });
+    document.querySelectorAll('[data-i18n-aria-label]').forEach(el => { const key = el.getAttribute('data-i18n-aria-label'); if (key) el.setAttribute('aria-label', t(key)); });
+    if (document.title) document.title = t('guideTitle');
+  };
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', apply, { once:true }); else apply();
+})();
+</script>
+
+<!-- PINBOARD_OPTIONS_FUNCTIONAL_SAFE_V79: options page kept prose-only; interactive backup/import control to verify in popup menu regression pass. -->
+</body>
+</html>
