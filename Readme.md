@@ -6,7 +6,7 @@ Unlike traditional tab managers or bookmarks, Pinboard organizes your content in
 
 ## 🎬 Video Demo
 
-<video src="preview.mp4" autoplay loop muted playsinline width="100%"></video>
+https://github.com/user-attachments/assets/1981c5b1-a1c2-491b-b3ce-a72ae615a54a
 
 ## 🚀 Key Features
 
